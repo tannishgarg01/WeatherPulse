@@ -2,13 +2,16 @@
 .venv/
 __pycache__/
 *.pyc
-
-# Environment
 .env
 
-# VS Code
-.vscode/
-
-# SQLite database
+# Database
 *.db
 *.db-journal
+
+# Node
+node_modules/
+dashboard/node_modules/
+dashboard/dist/
+
+# Editors
+.vscode/
