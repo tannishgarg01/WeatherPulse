@@ -296,14 +296,51 @@ Initial successful ingestion:
 | Fact tables | 1 |
 | Gold Layer views | 3 |
 
-## 🔮 Future Enhancements
 
-- Databricks and Delta Lake integration.
+## Databricks & Delta Lake Integration
+
+WeatherPulse is also integrated with **Databricks Free Edition** using a Medallion Architecture and Delta Lake.
+
+### Medallion Architecture
+
+| Layer | Delta Table | Records | Purpose |
+|---|---|---:|---|
+| Bronze | bronze_weather_raw | 7 | Stores raw weather JSON data |
+| Silver | silver_weather | 1,176 | Stores cleaned and structured hourly weather records |
+| Gold | gold_city_weather_summary | 7 | City-wise weather analytics |
+| Gold | gold_daily_weather_trend | 7 | Daily weather trends |
+| Gold | gold_hourly_weather_trend | 24 | Hourly weather trends |
+
+### Databricks Components
+
+- Databricks Free Edition
+- Serverless Starter Warehouse
+- Delta Lake tables
+- SQL-based data analysis
+- Medallion Architecture (Bronze, Silver, Gold)
+- Databricks AI/BI Dashboard
+
+### WeatherPulse Databricks Dashboard
+
+A published interactive dashboard provides:
+
+- Average temperature, humidity, precipitation and maximum wind speed KPIs.
+- City-wise average temperature comparison.
+- City-wise precipitation comparison.
+- 7-day average temperature trend.
+- 24-hour average temperature trend.
+- Detailed city-wise weather summary.
+
+All five Medallion Layer tables were successfully verified in Databricks.
+
+## Future Enhancements
+
 - Automated scheduled ingestion.
-- Cloud deployment.
+- Cloud deployment of the application.
 - Historical weather comparison.
 - Weather alerts and notifications.
 - Advanced geographical visualizations.
+
 
 ## 👨‍💻 Author
 
