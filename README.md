@@ -68,7 +68,17 @@ Includes analytical queries for:
 - Average humidity.
 - Daily and hourly weather trends.
 
-### 7. Interactive Dashboard
+### 7. Databricks & Delta Lake Integration
+
+Implemented a cloud-based Medallion Architecture using Databricks Free Edition, PySpark and Delta Lake.
+
+- Bronze Layer: Stores raw weather API JSON data.
+- Silver Layer: Flattens hourly weather arrays into 1,176 structured records and performs data quality checks.
+- Gold Layer: Creates analytical datasets for city-wise, daily and hourly weather analysis.
+- Databricks SQL: Queries Gold Layer Delta tables.
+- AI/BI Dashboard: Visualizes weather KPIs, city comparisons and temperature trends.
+
+### 8. Interactive Dashboard
 
 Built using React, Vite, Recharts, and Lucide React.
 
@@ -82,7 +92,7 @@ Dashboard features:
 - Detailed city weather table.
 - Manual data refresh.
 
-### 8. REST API
+### 9. REST API
 
 Backend developed using FastAPI.
 
@@ -103,12 +113,13 @@ Interactive API documentation is available at `/docs`.
 | Component | Technologies |
 |---|---|
 | Programming | Python, JavaScript, SQL |
-| API Source | Open-Meteo |
-| Data Processing | Pandas |
-| Database | SQLite |
+| API Source | Open-Meteo Forecast API |
+| Data Processing | Pandas, PySpark |
+| Database | SQLite, Databricks Delta Lake |
 | Backend | FastAPI, Uvicorn |
 | Frontend | React, Vite |
-| Charts | Recharts |
+| Data Engineering | Databricks, Medallion Architecture |
+| Analytics & Visualization | Recharts, Databricks AI/BI Dashboard |
 | Icons | Lucide React |
 | Version Control | Git, GitHub |
 
@@ -117,19 +128,24 @@ Interactive API documentation is available at `/docs`.
 ```text
 WeatherPulse/
 │
+├── databricks/
+│   └── WeatherPulse_Medallion_Pipeline.ipynb
+│
 ├── dashboard/
 │   ├── public/
 │   ├── src/
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   └── main.jsx
 │   ├── package.json
 │   └── vite.config.js
 │
 ├── docs/
 │   ├── er_diagram.md
 │   ├── deduplication_strategy.md
-│   └── star_schema.md
+│   ├── star_schema.md
+│   └── screenshots/
+│       ├── 01_dashboard_kpi_cards.png
+│       ├── 02_city_weather_comparison.png
+│       ├── 03_temperature_trends.png
+│       └── 04_city_weather_summary.png
 │
 ├── landing_zone/
 │   └── Raw JSON weather files
@@ -296,50 +312,40 @@ Initial successful ingestion:
 | Fact tables | 1 |
 | Gold Layer views | 3 |
 
+## 🔮 Future Enhancements
 
-## Databricks & Delta Lake Integration
-
-WeatherPulse is also integrated with **Databricks Free Edition** using a Medallion Architecture and Delta Lake.
-
-### Medallion Architecture
-
-| Layer | Delta Table | Records | Purpose |
-|---|---|---:|---|
-| Bronze | bronze_weather_raw | 7 | Stores raw weather JSON data |
-| Silver | silver_weather | 1,176 | Stores cleaned and structured hourly weather records |
-| Gold | gold_city_weather_summary | 7 | City-wise weather analytics |
-| Gold | gold_daily_weather_trend | 7 | Daily weather trends |
-| Gold | gold_hourly_weather_trend | 24 | Hourly weather trends |
-
-### Databricks Components
-
-- Databricks Free Edition
-- Serverless Starter Warehouse
-- Delta Lake tables
-- SQL-based data analysis
-- Medallion Architecture (Bronze, Silver, Gold)
-- Databricks AI/BI Dashboard
-
-### WeatherPulse Databricks Dashboard
-
-A published interactive dashboard provides:
-
-- Average temperature, humidity, precipitation and maximum wind speed KPIs.
-- City-wise average temperature comparison.
-- City-wise precipitation comparison.
-- 7-day average temperature trend.
-- 24-hour average temperature trend.
-- Detailed city-wise weather summary.
-
-All five Medallion Layer tables were successfully verified in Databricks.
-
-## Future Enhancements
-
-- Automated scheduled ingestion.
+- Automated scheduled weather data ingestion.
 - Cloud deployment of the application.
-- Historical weather comparison.
+- Historical weather comparison and forecasting.
 - Weather alerts and notifications.
 - Advanced geographical visualizations.
+- Integration with additional environmental data sources.
+
+## 📊 Databricks Dashboard – WeatherPulse
+
+The WeatherPulse AI/BI Dashboard provides an interactive view of weather conditions across seven Indian cities using Gold Layer Delta tables.
+
+### Dashboard Highlights
+
+- **KPI Cards:** Average Temperature, Average Humidity, Total Precipitation and Maximum Wind Speed.
+- **City Comparison:** Average temperature and total precipitation across seven cities.
+- **Daily Trends:** 7-day average temperature analysis.
+- **Hourly Trends:** 24-hour temperature cycle analysis.
+- **City-Wise Summary:** Detailed weather metrics for all monitored cities.
+
+### Dashboard Screenshots
+
+#### 1. Key Performance Indicators
+![WeatherPulse KPI Cards](docs/screenshots/01_dashboard_kpi_cards.png)
+
+#### 2. City Weather Comparison
+![City Weather Comparison](docs/screenshots/02_city_weather_comparison.png)
+
+#### 3. Daily and Hourly Temperature Trends
+![Temperature Trends](docs/screenshots/03_temperature_trends.png)
+
+#### 4. City-Wise Weather Summary
+![City Weather Summary](docs/screenshots/04_city_weather_summary.png)
 
 
 ## 👨‍💻 Author
